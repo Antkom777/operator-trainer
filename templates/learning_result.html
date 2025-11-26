@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Результат</h3>
+
+{% if correct %}
+    <p style="color: green;">✔ Вірно!</p>
+{% else %}
+    <p style="color: red;">✘ Невірно. Правильний пріоритет: {{ correct_priority }}</p>
+{% endif %}
+
+<h4>Оператори цього пріоритету:</h4>
+
+<table>
+    <tr><th>Оператор</th><th>Опис</th><th>Приклад</th></tr>
+    {% for op, desc, ex in table %}
+    <tr>
+        <td>{{ op }}</td>
+        <td>{{ desc }}</td>
+        <td>{{ ex }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a class="btn" href="/learning">Наступне питання</a>
+<a class="btn" href="/">Назад</a>
+{% endblock %}

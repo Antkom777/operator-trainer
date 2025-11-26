@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Уточнення операторів</h3>
+<p>Деякі оператори мають кілька форм. Будь ласка, уточни:</p>
+
+<form action="/check_final" method="POST">
+
+    {% if ambiguous.op1 %}
+        <label>Оператор 1 ({{ op1 }}):</label><br>
+        <select name="op1">
+            {% for variant in ambiguous.op1 %}
+                <option value="{{ variant }}">{{ variant }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+    {% else %}
+        <input type="hidden" name="op1" value="{{ op1 }}">
+    {% endif %}
+
+    {% if ambiguous.op2 %}
+        <label>Оператор 2 ({{ op2 }}):</label><br>
+        <select name="op2">
+            {% for variant in ambiguous.op2 %}
+                <option value="{{ variant }}">{{ variant }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+    {% else %}
+        <input type="hidden" name="op2" value="{{ op2 }}">
+    {% endif %}
+
+    <button class="btn">Продовжити</button>
+</form>
+
+{% endblock %}

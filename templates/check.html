@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Перевірка операторів</h3>
+
+<form action="/check_result" method="POST">
+    <label>Оператор 1:</label><br>
+    <input type="text" name="op1" style="width:200px;"><br><br>
+
+    <label>Оператор 2:</label><br>
+    <input type="text" name="op2" style="width:200px;"><br><br>
+
+    <button class="btn">Перевірити</button>
+</form>
+
+{% endblock %}

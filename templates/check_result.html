@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Результат перевірки</h3>
+
+{% if errors %}
+    <p style="color:red;">
+    {% for e in errors %}
+        {{ e }}<br>
+    {% endfor %}
+    </p>
+
+    <a href="/check" class="btn">Спробувати знову</a>
+{% else %}
+
+    {% if result == 1 %}
+        <p style="color:green;">Оператор 1 має вищий пріоритет</p>
+    {% elif result == 2 %}
+        <p style="color:green;">Оператор 2 має вищий пріоритет</p>
+    {% else %}
+        <p style="color:green;">Оператори мають однаковий пріоритет</p>
+    {% endif %}
+
+    <h4>{{ op1 }} (пріоритет {{ p1 }})</h4>
+    <p>{{ info1[1] }}<br>Приклад: <i>{{ info1[2] }}</i></p>
+
+    <h4>{{ op2 }} (пріоритет {{ p2 }})</h4>
+    <p>{{ info2[1] }}<br>Приклад: <i>{{ info2[2] }}</i></p>
+
+    <br>
+    <a class="btn" href="/check">Перевірити інші</a>
+{% endif %}
+
+<a class="btn" href="/">На головну</a>
+
+{% endblock %}

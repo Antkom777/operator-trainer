@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Тестовий режим</h3>
+
+<p>Оператор 1: <b>{{ op1 }}</b></p>
+<p>Оператор 2: <b>{{ op2 }}</b></p>
+
+<form action="/test_result" method="POST">
+    <input type="hidden" name="op1" value="{{ op1 }}">
+    <input type="hidden" name="op2" value="{{ op2 }}">
+    <input type="hidden" name="p1" value="{{ p1 }}">
+    <input type="hidden" name="p2" value="{{ p2 }}">
+
+    Хто має вищий пріоритет?
+    <br><br>
+    <label><input type="radio" name="answer" value="1"> Оператор 1</label><br>
+    <label><input type="radio" name="answer" value="2"> Оператор 2</label><br>
+    <label><input type="radio" name="answer" value="3"> Однаковий</label><br><br>
+
+    <button class="btn">Перевірити</button>
+</form>
+{% endblock %}

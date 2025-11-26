@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Навчальний режим</h3>
+
+<p>Оператор: <b>{{ op }}</b></p>
+
+<form action="/learning_result" method="POST">
+    <input type="hidden" name="op" value="{{ op }}">
+    <input type="hidden" name="priority" value="{{ priority }}">
+    Вкажи пріоритет: 
+    <input type="text" name="answer">
+    <button class="btn">Відповісти</button>
+</form>
+{% endblock %}
