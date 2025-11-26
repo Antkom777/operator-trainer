@@ -158,6 +158,13 @@ def perform_check(op1, op2):
         result=result
     )
 
+# ---------------------------
+# Theory page
+# ---------------------------
+@app.route("/theory")
+def theory():
+    return render_template("theory.html", table=PRIORITY_TABLE)
+
 @app.route("/check_final", methods=["POST"])
 def check_final():
     op1 = request.form["op1"]
@@ -165,4 +172,4 @@ def check_final():
     return perform_check(op1, op2)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
