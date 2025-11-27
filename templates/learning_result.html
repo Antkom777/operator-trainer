@@ -4,7 +4,7 @@
 <h3>Результат</h3>
 
 {% if correct %}
-    <p style="color: green;">✔ Вірно!</p>
+    <p style="color: green;">✔ Вірно! Правильний пріоритет: {{ correct_priority }}</p>
 {% else %}
     <p style="color: red;">✘ Невірно. Правильний пріоритет: {{ correct_priority }}</p>
 {% endif %}

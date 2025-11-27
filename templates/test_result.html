@@ -1,23 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>Результат</h3>
 
-{% if is_correct %}
-    <p style="color: green;">✔ Вірно!</p>
-{% else %}
-    <p style="color: red;">✘ Невірно. Правильна відповідь: {{ correct }}</p>
-{% endif %}
+<div class="card" style="padding: 20px;">
 
-<h4>Інформація про оператори:</h4>
+    {% if error %}
+        <h3>Результат</h3>
 
-<h4>{{ op1 }} (пріоритет {{ p1 }})</h4>
-<p>{{ info1[1] }}<br>Приклад: <i>{{ info1[2] }}</i></p>
+        <p style="color: red; font-weight: bold; font-size: 18px;">
+            {{ error }}
+        </p>
 
-<h4>{{ op2 }} (пріоритет {{ p2 }})</h4>
-<p>{{ info2[1] }}<br>Приклад: <i>{{ info2[2] }}</i></p>
+        <a class="btn" href="/test">Повернутися до тесту</a>
+        <a class="btn" href="/">Назад</a>
 
-<br>
-<a class="btn" href="/test">Наступне порівняння</a>
-<a class="btn" href="/">Назад</a>
+    {% else %}
+
+        <h3>Результат</h3>
+
+        {% if is_correct %}
+            <p style="color: green;">✔ Вірно!</p>
+        {% else %}
+            <p style="color: red;">✘ Невірно. Правильна відповідь: {{ correct }}</p>
+        {% endif %}
+
+        <h4>Інформація про оператори:</h4>
+
+        <h4>{{ op1 }} (пріоритет {{ p1 }})</h4>
+        <p>{{ info1[1] }}<br>Приклад: <i>{{ info1[2] }}</i></p>
+
+        <h4>{{ op2 }} (пріоритет {{ p2 }})</h4>
+        <p>{{ info2[1] }}<br>Приклад: <i>{{ info2[2] }}</i></p>
+
+        <br>
+        <a class="btn" href="/test">Наступне порівняння</a>
+        <a class="btn" href="/">Назад</a>
+
+    {% endif %}
+
+</div>
+
 {% endblock %}

@@ -53,32 +53,56 @@ def test():
 
 @app.route("/test_result", methods=["POST"])
 def test_result():
+
+    # 1. Read answer
+    user_answer = request.form.get("answer")
+
+    # If user did not choose any answer
+    if user_answer is None:
+        return render_template(
+            "test_result.html",
+            error="Ви не вибрали відповідь! Будь ласка, зробіть свій вибір."
+        )
+
+    # 2. Read operators from form
     op1 = request.form["op1"]
     op2 = request.form["op2"]
     p1 = int(request.form["p1"])
     p2 = int(request.form["p2"])
-    user_answer = request.form["answer"]
 
-    # Determine the correct answer
+    user_answer = int(user_answer)
+
+    # 3. Determine which operator is correct
     if p1 == p2:
-        correct = 3  # same priority
+        correct = 3
     elif p1 < p2:
         correct = 1
     else:
         correct = 2
 
-    is_correct = (user_answer == str(correct))
+    is_correct = (user_answer == correct)
 
-    # Get operator descriptions
-    op1_info = next(item for item in PRIORITY_TABLE[p1] if item[0] == op1)
-    op2_info = next(item for item in PRIORITY_TABLE[p2] if item[0] == op2)
+    # 4. Retrieve operator descriptions again (no need to send via form)
+    def find_info(op):
+        for priority, lst in PRIORITY_TABLE.items():
+            for name, desc, example in lst:
+                if name == op:
+                    return (name, desc, example)
+        return None
+
+    info1 = find_info(op1)
+    info2 = find_info(op2)
 
     return render_template(
         "test_result.html",
-        op1=op1, p1=p1, info1=op1_info,
-        op2=op2, p2=p2, info2=op2_info,
+        is_correct=is_correct,
         correct=correct,
-        is_correct=is_correct
+        op1=op1,
+        op2=op2,
+        p1=p1,
+        p2=p2,
+        info1=info1,
+        info2=info2
     )
 
 # ---------------------------
@@ -100,6 +124,7 @@ def check_result():
         "+":  ["+ (унарний)", "+ (бінарний)"],
         "-":  ["- (унарний)", "- (бінарний)"],
         "*":  ["* (унарний)", "* (бінарний)"], 
+        "&":  ["& (унарний)", "& (бінарний)"], 
     }
 
     # Collect ambiguous operators
